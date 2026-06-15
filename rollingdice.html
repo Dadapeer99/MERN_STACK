@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dice Roller</title>
+
+    <style>
+        body{
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            margin:0;
+            font-family:Arial, sans-serif;
+        }
+
+        img{
+            width:150px;
+            height:150px;
+        }
+
+        button{
+            margin-top:20px;
+            padding:10px 20px;
+            font-size:18px;
+            cursor:pointer;
+        }
+
+        #result{
+            margin-top:20px;
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        .roll{
+            animation: roll 0.8s linear;
+        }
+
+        @keyframes roll{
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(720deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎲 Dice Roller</h1>
+
+    <img id="dice" src="images/dice/1.png" alt="dice">
+
+    <p id="result">Click Roll Dice</p>
+
+    <button id="btn" onclick="rollDice()">Roll Dice</button>
+
+    <script>
+        function rollDice(){
+
+            let dice = document.getElementById("dice");
+            let result = document.getElementById("result");
+            let btn = document.getElementById("btn");
+
+            btn.disabled = true;
+            result.innerHTML = "Rolling...";
+
+            dice.classList.add("roll");
+
+            let count = 0;
+
+            let animation = setInterval(() => {
+
+                let random = Math.floor(Math.random() * 6) + 1;
+
+                dice.src = `images/dice/${random}.png`;
+
+                count++;
+
+                if(count === 10){
+
+                    clearInterval(animation);
+
+                    let finalNumber =
+                        Math.floor(Math.random() * 6) + 1;
+
+                    dice.src = `images/dice/${finalNumber}.png`;
+
+                    result.innerHTML =
+                        `🎲 You rolled: ${finalNumber}`;
+
+                    dice.classList.remove("roll");
+
+                    btn.disabled = false;
+                }
+
+            }, 100);
+        }
+    </script>
+
+</body>
+</html>

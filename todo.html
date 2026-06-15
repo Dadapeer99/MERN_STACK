@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function todo(){
+            let d=document.getElementById("value");
+            if(d.value==""){
+                alert("Please enter a work");
+                return false;
+            }
+            else{
+                let table=document.getElementById("data");
+                let row=table.insertRow();
+                let cell1=row.insertCell(0);
+                let cell2=row.insertCell(1);
+                cell1.innerHTML=d.value;
+                cell2.innerHTML="<button onclick='deleteRow(this)'>Delete</button>";
+                d.value="";
+                return false;
+            }
+        }
+        function deleteRow(btn)
+        {
+        let row = btn.parentNode.parentNode;
+        row.remove();
+        }
+    </script>
+    <style>
+        table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+    th, td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+    </style>
+</head>
+<body>
+    <form onsubmit="return todo()">
+        <input type="text" id="value" placeholder="work to to" style="height: 100px;width: 1500px;">
+        <br><br>
+        <div style="display: flex; align-items: center; justify-content: center">
+        <button type="submit" style="width: 100px;">add</button>
+        </div>
+        <br><br>
+    </form>
+    <table>
+        <thead>
+            <tr>
+            <th>Work</th>
+            <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="data">
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+<!-- <script>
+function todo() {
+    let tbody = document.getElementById("table");
+
+    let row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${work}</td>
+        <td>
+            <button type="button" onclick="deleteRow(this)">
+                Delete
+            </button>
+        </td>
+    `;
+
+    tbody.appendChild(row);
+
+    input.value = "";
+    return false;
+}
+
+function deleteRow(btn) {
+    btn.closest("tr").remove();
+}
+</script> -->
